@@ -1,49 +1,55 @@
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
-
-const fetchHealth = async () => {
-  const { data } = await axios.get("http://localhost:8000/health")
-  return data
-}
+import { useEffect, useState } from "react"
+import { checkHealth } from "@/lib/api"
 
 function App() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["health"],
-    queryFn: fetchHealth,
-  })
+  const [status, setStatus] = useState<string>("connecting...")
+  const [isError, setIsError] = useState<boolean>(false)
+
+  useEffect(() => {
+    const getStatus = async () => {
+      try {
+        const data = await checkHealth()
+        setStatus(data.status)
+        setIsError(false)
+      } catch (err) {
+        console.error("Health check failed:", err)
+        setStatus("error")
+        setIsError(true)
+      }
+    }
+
+    getStatus()
+  }, [])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <div className="p-8 bg-white rounded-xl shadow-lg border border-slate-200 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-slate-900 mb-4">JobRadar Health Check</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-white p-4">
+      <div className="text-center space-y-4">
+        <h1 className="text-6xl font-extrabold tracking-tight">
+          JobRadar
+        </h1>
+        <p className="text-slate-400 text-xl font-medium">
+          Loading your applications...
+        </p>
         
-        {isLoading && (
-          <p className="text-slate-600 animate-pulse">Checking backend status...</p>
-        )}
-
-        {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-700 font-medium">Backend Unreachable</p>
-            <p className="text-red-600 text-sm mt-1">
-              Make sure the FastAPI server is running on localhost:8000
-            </p>
-          </div>
-        )}
-
-        {data && (
-          <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-700 font-medium text-lg">
-              Status: <span className="uppercase">{data.status}</span>
-            </p>
-            <p className="text-green-600 text-sm mt-1">
-              Frontend and Backend are connected!
-            </p>
-          </div>
-        )}
-
-        <div className="mt-6 pt-6 border-t border-slate-100 text-slate-500 text-xs">
-          Built with React + Vite + TypeScript + Tailwind CSS
+        <div className="pt-8">
+          {status === "connecting..." ? (
+            <span className="px-4 py-2 rounded-full bg-slate-800 text-slate-300 text-sm font-semibold animate-pulse border border-slate-700">
+              Backend: connecting...
+            </span>
+          ) : isError ? (
+            <span className="px-4 py-2 rounded-full bg-red-900/30 text-red-400 text-sm font-semibold border border-red-900/50">
+              Backend: error
+            </span>
+          ) : (
+            <span className="px-4 py-2 rounded-full bg-emerald-900/30 text-emerald-400 text-sm font-semibold border border-emerald-900/50">
+              Backend: {status}
+            </span>
+          )}
         </div>
+      </div>
+
+      <div className="absolute bottom-8 text-slate-600 text-xs uppercase tracking-widest font-bold">
+        Vite + React + Tailwind v4 + Shadcn
       </div>
     </div>
   )
