@@ -86,11 +86,11 @@ AI-powered job application tracker with Gmail integration, Kanban board UI, and 
 
 **Goal:** All endpoints built and tested that the frontend will consume.
 
-- [ ] **Step 17** — Applications CRUD endpoints (GET all, GET one, POST manual entry, PATCH status/notes, DELETE)
-- [ ] **Step 18** — Review queue endpoints (GET pending, POST confirm/correct)
-- [ ] **Step 19** — Dashboard stats endpoint (counts by status, response rate, weekly trend data)
-- [ ] **Step 20** — Manual poll trigger endpoint (POST `/poll` runs Gmail fetch + classify on demand)
-- [ ] **Step 21** — Cover letter endpoint (POST with JD text, returns AI draft)
+- [x] **Step 17** — Applications CRUD endpoints (GET all, GET one, POST manual entry, PATCH status/notes, DELETE)
+- [x] **Step 18** — Review queue endpoints (GET pending, POST confirm/correct)
+- [x] **Step 19** — Dashboard stats endpoint (counts by status, response rate, weekly trend data)
+- [x] **Step 20** — Manual poll trigger endpoint (POST `/poll` runs Gmail fetch + classify on demand)
+- [x] **Step 21** — Cover letter endpoint (POST with JD text, returns AI draft)
 
 **Phase 4 Notes:**
 

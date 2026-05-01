@@ -139,6 +139,41 @@ def process_email(sender_name: str, sender_email: str, subject: str, body_snippe
             }
         }
 
+def generate_cover_letter(job_description: str, company: str, role: str, resume_text: str) -> dict:
+    """
+    Generates a tailored cover letter and gap analysis using Gemini.
+    """
+    prompt = (
+        "You are an expert career coach and professional writer. Write a professional 3-paragraph cover letter "
+        f"for a {role} position at {company} tailored to the job description and resume provided below.\n\n"
+        "Instructions:\n"
+        "- Paragraph 1: Catchy hook and why I am excited about this company specifically.\n"
+        "- Paragraph 2: Highlight 2-3 strongest matches between my experience and the job requirements.\n"
+        "- Paragraph 3: Closing statement and call to action.\n"
+        "- Tone: Professional, confident, and enthusiastic.\n\n"
+        "Also identify 'key_matches' (3-5 bullet points of strongest alignment) and 'gaps' (0-3 skills/reqs in the JD not strongly represented in the resume).\n\n"
+        "Respond ONLY with valid JSON in this format:\n"
+        "{\n"
+        "  \"cover_letter\": \"<the full text of the 3 paragraphs>\",\n"
+        "  \"key_matches\": [\"match 1\", \"match 2\", ...],\n"
+        "  \"gaps\": [\"gap 1\", ...]\n"
+        "}\n\n"
+        f"JOB DESCRIPTION:\n{job_description}\n\n"
+        f"RESUME:\n{resume_text}"
+    )
+
+    try:
+        response_text = call_gemini(prompt)
+        clean_json = response_text.strip().strip("`").replace("json\n", "", 1)
+        return json.loads(clean_json)
+    except Exception as e:
+        print(f"Error generating cover letter: {e}")
+        return {
+            "cover_letter": "Error generating cover letter. Please try again.",
+            "key_matches": [],
+            "gaps": [str(e)]
+        }
+
 if __name__ == "__main__":
     if not api_key:
         print("Error: GEMINI_API_KEY not found in environment variables.")
