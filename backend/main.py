@@ -1,8 +1,15 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import init_db
+from routers import emails
+
+# Load environment variables
+load_dotenv()
 
 app = FastAPI(title="JobRadar API")
+app.include_router(emails.router)
 
 # Enable CORS for frontend connectivity
 app.add_middleware(

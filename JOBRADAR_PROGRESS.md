@@ -49,11 +49,11 @@ AI-powered job application tracker with Gmail integration, Kanban board UI, and 
 
 **Goal:** OAuth flow working, emails fetched and stored in SQLite, deduplicated by message ID.
 
-- [ ] **Step 6** — Google Cloud project created, Gmail API enabled, OAuth credentials downloaded (`credentials.json`)
-- [ ] **Step 7** — Gmail auth flow written in Python (browser consent on first run, token saved to `token.json`, auto-refresh working)
-- [ ] **Step 8** — Email fetcher written (pulls last 7 days of unread emails, extracts sender/subject/body/timestamp/thread ID)
-- [ ] **Step 9** — Raw emails stored in SQLite (deduplicated by Gmail message ID)
-- [ ] **Step 10** — Live inbox test passed (real emails pulling and storing correctly)
+- [x] **Step 6** — Google Cloud project created, Gmail API enabled, OAuth credentials downloaded (`credentials.json`)
+- [x] **Step 7** — Gmail auth flow written in Python (browser consent on first run, token saved to `token.json`, auto-refresh working)
+- [x] **Step 8** — Email fetcher written (pulls last 7 days of unread emails, extracts sender/subject/body/timestamp/thread ID)
+- [x] **Step 9** — Raw emails stored in SQLite (deduplicated by Gmail message ID)
+- [x] **Step 10** — Live inbox test passed (real emails pulling and storing correctly)
 
 **Phase 2 Notes:**
 
