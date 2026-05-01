@@ -67,12 +67,12 @@ AI-powered job application tracker with Gmail integration, Kanban board UI, and 
 
 **Goal:** Gemini classifying emails, structured JSON output, confidence threshold routing to review queue.
 
-- [ ] **Step 11** — Gemini Python SDK installed, API key configured, first test call working
-- [ ] **Step 12** — Classification prompt written and tested (returns `{type, company, role, confidence, action_needed, reasoning}`)
-- [ ] **Step 13** — Extraction prompt written and tested (pulls clean fields from confirmed job emails)
-- [ ] **Step 14** — Confidence threshold logic added (≥85% auto-log, <85% → review queue)
-- [ ] **Step 15** — Classifier wired into email fetcher pipeline
-- [ ] **Step 16** — Prompt iteration complete (classification feels accurate on real emails)
+- [x] **Step 11** — Gemini Python SDK installed, API key configured, first test call working
+- [x] **Step 12** — Classification prompt written and tested (returns `{type, company, role, confidence, action_needed, reasoning}`)
+- [x] **Step 13** — Extraction prompt written and tested (pulls clean fields from confirmed job emails)
+- [x] **Step 14** — Confidence threshold logic added (≥85% auto-log, <85% → review queue)
+- [x] **Step 15** — Classifier wired into email fetcher pipeline
+- [x] **Step 16** — Prompt iteration complete (classification feels accurate on real emails)
 
 **Phase 3 Notes:**
 
